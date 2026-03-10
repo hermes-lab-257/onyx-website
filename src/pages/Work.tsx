@@ -1,0 +1,151 @@
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+
+const workItems = [
+  { 
+    category: 'F&B', 
+    title: 'Restaurant Brand Identity', 
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    description: 'Complete brand overhaul for a Korean BBQ restaurant'
+  },
+  { 
+    category: 'Retail', 
+    title: 'E-commerce Redesign', 
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
+    description: 'Modern e-commerce experience for a fashion brand'
+  },
+  { 
+    category: 'Services', 
+    title: 'Corporate Website', 
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+    description: 'Professional corporate presence for consulting firm'
+  },
+  { 
+    category: 'Tech', 
+    title: 'SaaS Platform UI', 
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    description: 'Intuitive dashboard design for analytics platform'
+  },
+  { 
+    category: 'Beauty', 
+    title: 'Beauty Brand Launch', 
+    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80',
+    description: 'Full brand launch including packaging and digital'
+  },
+  { 
+    category: 'Fitness', 
+    title: 'Fitness App Design', 
+    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
+    description: 'Mobile app design for fitness startup'
+  },
+];
+
+const categories = ['All', 'F&B', 'Retail', 'Services', 'Tech', 'Beauty', 'Fitness'];
+
+export default function Work() {
+  return (
+    <div className="pt-32 pb-20">
+      {/* Hero */}
+      <section className="px-4 mb-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-4">Our Work</p>
+            <h1 className="text-6xl md:text-7xl font-heading italic text-white mb-6">
+              Recent Projects
+            </h1>
+            <p className="text-xl text-white/60 font-body font-light max-w-2xl mx-auto">
+              A showcase of our work across branding, digital, and content. Each project represents our commitment to excellence.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Filter */}
+      <section className="px-4 mb-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {categories.map((category, index) => (
+              <motion.button
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className={`px-5 py-2 rounded-full text-sm font-body transition-all ${
+                  category === 'All'
+                    ? 'bg-white text-black'
+                    : 'bg-white/5 text-white/60 hover:bg-white/10'
+                }`}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Work Grid */}
+      <section className="px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {workItems.map((work, index) => (
+              <motion.div
+                key={work.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="relative rounded-2xl overflow-hidden cursor-pointer"
+                >
+                  <div className="aspect-[4/3]">
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all">
+                    <p className="text-xs text-white/60 uppercase tracking-wider font-body mb-1">{work.category}</p>
+                    <h3 className="text-xl font-heading text-white mb-2">{work.title}</h3>
+                    <p className="text-sm text-white/70 font-body">{work.description}</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="px-4 py-32">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-heading italic text-white mb-6">Have a Project in Mind?</h2>
+            <p className="text-white/60 font-body mb-8">
+              We'd love to hear about your project. Let's create something amazing together.
+            </p>
+            <a
+              href="/contact"
+              className="liquid-glass-strong rounded-full px-8 py-4 text-lg font-medium text-white font-body inline-flex items-center gap-2 hover:bg-white/10 transition-all"
+            >
+              Start a Project
+              <ArrowRight className="h-5 w-5" />
+            </a>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
