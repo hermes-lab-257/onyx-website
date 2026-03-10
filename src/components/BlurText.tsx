@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface BlurTextProps {
@@ -14,7 +14,7 @@ export default function BlurText({
   text,
   className = '',
   delay = 100,
-  animateBy = 'words',
+  _animateBy = 'words',
   direction = 'bottom',
   stepDuration = 0.35,
 }: BlurTextProps) {

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Play } from 'lucide-react';
-import BlurText from './BlurText';
+import BlurText from './components/BlurText';
 
 const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260306_115329_5e00c9c5-4d69-49b7-94c3-9c31c60bb644.mp4';
 
@@ -11,7 +11,6 @@ const partners = ['Aeon', 'Vela', 'Apex', 'Orbit', 'Zeno'];
 
 export default function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
