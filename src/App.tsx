@@ -33,7 +33,6 @@ export default function App() {
           playsInline
           preload="auto"
           poster="/images/hero_bg.jpeg"
-          onCanPlay={() => setIsLoaded(true)}
         >
           <source src={VIDEO_URL} type="video/mp4" />
         </video>

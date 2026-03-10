@@ -14,7 +14,8 @@ export default function BlurText({
   text,
   className = '',
   delay = 100,
-  _animateBy = 'words',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  animateBy = 'words',
   direction = 'bottom',
   stepDuration = 0.35,
 }: BlurTextProps) {
