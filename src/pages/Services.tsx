@@ -145,11 +145,11 @@ export default function Services() {
                     <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors">
                       <span className="font-body">Learn More</span>
                       <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </motion.div>
+                    </div>
+                  </motion.div>
                 </Link>
               </motion.div>
-</div>
-                              ))}
+            ))}
           </div>
         </div>
       </section>
