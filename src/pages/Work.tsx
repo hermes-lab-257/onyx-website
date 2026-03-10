@@ -1,48 +1,62 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import HoverExpandGallery from '../components/HoverExpandGallery';
 
 const workItems = [
   { 
     category: 'F&B', 
     title: 'Restaurant Brand Identity', 
     image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
-    description: 'Complete brand overhaul for a Korean BBQ restaurant'
+    description: 'Complete brand overhaul for a Korean BBQ restaurant',
+    code: '#01'
   },
   { 
     category: 'Retail', 
     title: 'E-commerce Redesign', 
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
-    description: 'Modern e-commerce experience for a fashion brand'
+    description: 'Modern e-commerce experience for a fashion brand',
+    code: '#02'
   },
   { 
     category: 'Services', 
     title: 'Corporate Website', 
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-    description: 'Professional corporate presence for consulting firm'
+    description: 'Professional corporate presence for consulting firm',
+    code: '#03'
   },
   { 
     category: 'Tech', 
     title: 'SaaS Platform UI', 
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    description: 'Intuitive dashboard design for analytics platform'
+    description: 'Intuitive dashboard design for analytics platform',
+    code: '#04'
   },
   { 
     category: 'Beauty', 
     title: 'Beauty Brand Launch', 
     image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80',
-    description: 'Full brand launch including packaging and digital'
+    description: 'Full brand launch including packaging and digital',
+    code: '#05'
   },
   { 
     category: 'Fitness', 
     title: 'Fitness App Design', 
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-    description: 'Mobile app design for fitness startup'
+    description: 'Mobile app design for fitness startup',
+    code: '#06'
   },
 ];
 
 const categories = ['All', 'F&B', 'Retail', 'Services', 'Tech', 'Beauty', 'Fitness'];
 
 export default function Work() {
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const filteredItems = activeCategory === 'All' 
+    ? workItems 
+    : workItems.filter(item => item.category === activeCategory);
+
   return (
     <div className="pt-32 pb-20">
       {/* Hero */}
@@ -74,8 +88,9 @@ export default function Work() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
+                onClick={() => setActiveCategory(category)}
                 className={`px-5 py-2 rounded-full text-sm font-body transition-all ${
-                  category === 'All'
+                  category === activeCategory
                     ? 'bg-white text-black'
                     : 'bg-white/5 text-white/60 hover:bg-white/10'
                 }`}
@@ -87,40 +102,16 @@ export default function Work() {
         </div>
       </section>
 
-      {/* Work Grid */}
-      <section className="px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {workItems.map((work, index) => (
-              <motion.div
-                key={work.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="relative rounded-2xl overflow-hidden cursor-pointer"
-                >
-                  <div className="aspect-[4/3]">
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all">
-                    <p className="text-xs text-white/60 uppercase tracking-wider font-body mb-1">{work.category}</p>
-                    <h3 className="text-xl font-heading text-white mb-2">{work.title}</h3>
-                    <p className="text-sm text-white/70 font-body">{work.description}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+      {/* Work Gallery — HoverExpand */}
+      <section className="px-4 py-8">
+        <div className="max-w-[1600px] mx-auto overflow-x-auto scroll-smooth">
+          <HoverExpandGallery
+            images={filteredItems.map(item => ({
+              src: item.image,
+              alt: item.title,
+              code: item.code,
+            }))}
+          />
         </div>
       </section>
 
