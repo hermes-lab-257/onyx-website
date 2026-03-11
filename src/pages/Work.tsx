@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import HoverExpandGallery from '../components/HoverExpandGallery';
+import { PerspectiveCarousel } from '../components/PerspectiveCarousel';
 
 const workItems = [
   { 
@@ -99,6 +100,31 @@ export default function Work() {
               </motion.button>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Perspective Carousel — Featured Work */}
+      <section className="px-4 py-8">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-2">Featured</p>
+            <h2 className="text-4xl font-heading italic text-white">Perspective Gallery</h2>
+          </motion.div>
+
+          <PerspectiveCarousel
+            images={filteredItems.map(item => ({
+              src: item.image,
+              alt: item.title,
+            }))}
+            showNavigation
+            autoplay
+            className="pb-10"
+          />
         </div>
       </section>
 
