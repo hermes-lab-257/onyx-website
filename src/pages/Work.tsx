@@ -3,53 +3,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import HoverExpandGallery from '../components/HoverExpandGallery';
 import { PerspectiveCarousel } from '../components/PerspectiveCarousel';
+import { workItems } from '../data/workItems';
 
-const workItems = [
-  { 
-    category: 'F&B', 
-    title: 'Restaurant Brand Identity', 
-    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
-    description: 'Complete brand overhaul for a Korean BBQ restaurant',
-    code: '#01'
-  },
-  { 
-    category: 'Retail', 
-    title: 'E-commerce Redesign', 
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
-    description: 'Modern e-commerce experience for a fashion brand',
-    code: '#02'
-  },
-  { 
-    category: 'Services', 
-    title: 'Corporate Website', 
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-    description: 'Professional corporate presence for consulting firm',
-    code: '#03'
-  },
-  { 
-    category: 'Tech', 
-    title: 'SaaS Platform UI', 
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
-    description: 'Intuitive dashboard design for analytics platform',
-    code: '#04'
-  },
-  { 
-    category: 'Beauty', 
-    title: 'Beauty Brand Launch', 
-    image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80',
-    description: 'Full brand launch including packaging and digital',
-    code: '#05'
-  },
-  { 
-    category: 'Fitness', 
-    title: 'Fitness App Design', 
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80',
-    description: 'Mobile app design for fitness startup',
-    code: '#06'
-  },
-];
-
-const categories = ['All', 'F&B', 'Retail', 'Services', 'Tech', 'Beauty', 'Fitness'];
+const categories = ['All', ...Array.from(new Set(workItems.map(p => p.category)))];
 
 export default function Work() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -136,6 +92,7 @@ export default function Work() {
               src: item.image,
               alt: item.title,
               code: item.code,
+              slug: item.title.toLowerCase().replace(/\s+/g, '-'),
             }))}
           />
         </div>

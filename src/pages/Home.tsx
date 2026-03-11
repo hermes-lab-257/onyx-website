@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { ArrowUpRight, Play, ChevronDown, Sparkles, Globe, Palette, Video, ArrowRight } from 'lucide-react';
 import BlurText from '../components/BlurText';
+import { PerspectiveCarousel } from '../components/PerspectiveCarousel';
 
 const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260306_115329_5e00c9c5-4d69-49b7-94c3-9c31c60bb644.mp4';
 
@@ -47,9 +48,21 @@ const stats = [
 ];
 
 const workItems = [
-  { category: 'F&B', title: 'Restaurant Brand Identity', image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80' },
-  { category: 'Retail', title: 'E-commerce Redesign', image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80' },
-  { category: 'Services', title: 'Corporate Website', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80' },
+  {
+    category: 'F&B',
+    title: 'Mul Gogi Korean BBQ',
+    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80',
+  },
+  {
+    category: 'Retail',
+    title: "Lee's Bamboo Blinds",
+    image: 'https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=800&q=80',
+  },
+  {
+    category: 'Services',
+    title: 'INTfinity Consulting',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  },
 ];
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -256,53 +269,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Work Preview */}
+      {/* Work Preview — Perspective Carousel */}
       <section className="py-32 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
-              <div>
-                <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-4">Our Work</p>
-                <h2 className="text-5xl md:text-6xl font-heading italic text-white">Recent Projects</h2>
-              </div>
+            <div className="text-center mb-12">
+              <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-2">Our Work</p>
+              <h2 className="text-5xl md:text-6xl font-heading italic text-white">Recent Projects</h2>
+              <p className="text-white/60 font-body font-light mt-4 max-w-2xl mx-auto">
+                A showcase of our work across branding, digital, and content.
+              </p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <PerspectiveCarousel
+              images={workItems.map(item => ({ src: item.image, alt: item.title }))}
+              showNavigation
+              autoplay
+              className="pb-10"
+            />
+          </FadeIn>
+
+          <FadeIn delay={0.4}>
+            <div className="text-center mt-12">
               <Link to="/work">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
-                  className="hidden md:flex items-center gap-2 text-white/60 hover:text-white transition-colors font-body mt-6 md:mt-0"
+                  className="text-white/60 hover:text-white font-body flex items-center gap-2 mx-auto transition-colors"
                 >
                   View All Projects <ArrowRight className="h-4 w-4" />
                 </motion.button>
               </Link>
             </div>
           </FadeIn>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {workItems.map((work, index) => (
-              <FadeIn key={work.title} delay={index * 0.1}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="group relative rounded-2xl overflow-hidden cursor-pointer"
-                >
-                  <div className="aspect-[4/3]">
-                    <img
-                      src={work.image}
-                      alt={work.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <p className="text-xs text-white/60 uppercase tracking-wider font-body mb-1">{work.category}</p>
-                    <h3 className="text-xl font-heading text-white">{work.title}</h3>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
-
-          <Link to="/work" className="md:hidden flex items-center justify-center gap-2 text-white/60 hover:text-white transition-colors font-body mt-8">
-            View All Projects <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </section>
 
