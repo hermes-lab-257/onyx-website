@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import { MobileMenu } from './MobileMenu';
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -79,52 +80,19 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-white"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="lg:hidden text-white p-2"
+          onClick={() => setIsMobileMenuOpen(true)}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="lg:hidden mt-4 mx-4 liquid-glass rounded-2xl p-6"
-          >
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block py-3 text-lg font-body ${
-                    location.pathname === link.href
-                      ? 'text-white'
-                      : 'text-white/70'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              </motion.div>
-            ))}
-            <Link
-              to="/contact"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block mt-4 bg-white text-black rounded-full px-4 py-2 text-sm font-medium font-body text-center"
-            >
-              Get Started
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu Overlay */}
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </motion.nav>
   );
 }
