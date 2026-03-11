@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { ArrowRight, ChevronDown, Sparkles, Globe, Palette, Video, Play } from 'lucide-react';
+import { ArrowUpRight, Play, ChevronDown, Sparkles, Globe, Palette, Video, ArrowRight } from 'lucide-react';
+import BlurText from '../components/BlurText';
 import { PerspectiveCarousel } from '../components/PerspectiveCarousel';
 
-const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260306_074215_04640ca7-042c-45d6-bb56-58b1e8a42489.mp4';
+const VIDEO_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260306_115329_5e00c9c5-4d69-49b7-94c3-9c31c60bb644.mp4';
 
 const services = [
   {
@@ -37,7 +38,7 @@ const services = [
   },
 ];
 
-const partners = ['Mul Gogi', "Lee's Bamboo", 'INTfinity', 'Nexus Labs', 'Vertex Co'];
+const partners = ['Mul Gogi', 'Lee\'s Bamboo', 'INTfinity', 'Nexus Labs', 'Vertex Co'];
 
 const stats = [
   { value: '50+', label: 'Projects Delivered' },
@@ -94,104 +95,105 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - New Design */}
-      <section className="relative min-h-screen flex items-center justify-center">
-        {/* Full-screen video background */}
-        <div className="fixed inset-0 z-0">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center">
+        <motion.div
+          style={{ opacity: heroOpacity, scale: heroScale }}
+          className="fixed inset-0 z-0 bg-gradient-to-b from-[#0a0a0a] via-[#1a1a2e] to-[#0a0a0a]"
+        >
           <video
             ref={videoRef}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover opacity-40"
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
+            poster="/images/hero_bg.jpeg"
           >
             <source src={VIDEO_URL} type="video/mp4" />
           </video>
-        </div>
-
-        {/* Transparent Navbar - floating, no background */}
-        <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-          <div className="max-w-7xl mx-auto flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold text-white font-[Barlow] tracking-wide">
-              ONYX
-            </Link>
-            <div className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-white/80 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-colors text-sm font-medium font-[Barlow]">
-                Home
-              </Link>
-              <Link to="/services" className="text-white/80 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-colors text-sm font-medium font-[Barlow]">
-                Services
-              </Link>
-              <Link to="/work" className="text-white/80 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-colors text-sm font-medium font-[Barlow]">
-                Work
-              </Link>
-              <Link to="/contact" className="text-white/80 hover:text-white hover:bg-white/10 px-3 py-1.5 rounded transition-colors text-sm font-medium font-[Barlow]">
-                Contact
-              </Link>
-            </div>
-          </div>
-        </nav>
+          <div className="absolute inset-0 bg-black/60" />
+        </motion.div>
 
         {/* Hero Content */}
-        <div className="relative z-10 pt-32 pb-64 px-4 w-full">
-          <div className="max-w-5xl mx-auto">
-            {/* Featured Badge */}
-            <FadeIn>
-              <div className="flex justify-center mb-12">
-                <div className="relative">
-                  <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-sm" />
-                  <div className="relative rounded-full bg-white/90 backdrop-blur-md px-8 py-3">
-                    <span className="text-sm font-medium text-black font-[Barlow]">Featured in Fortune</span>
-                  </div>
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Main Content Box with Corner Accents */}
+        <div className="relative z-10 text-center px-4 pt-24">
+          <FadeIn>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="relative bg-transparent p-12 pb-64"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="liquid-glass rounded-full px-1.5 py-1 inline-flex items-center gap-3 mb-10"
             >
-              {/* Corner accents */}
-              <div className="absolute top-0 left-0 w-[7px] h-[7px] bg-white" />
-              <div className="absolute top-0 right-0 w-[7px] h-[7px] bg-white" />
-              <div className="absolute bottom-0 left-0 w-[7px] h-[7px] bg-white" />
-              <div className="absolute bottom-0 right-0 w-[7px] h-[7px] bg-white" />
+              <span className="bg-white text-black rounded-full px-3 py-1 text-xs font-semibold font-body">
+                Singapore
+              </span>
+              <span className="text-sm text-white/70 pr-2 font-body">Full-Suite Digital Agency</span>
+            </motion.div>
+          </FadeIn>
 
-              {/* Headline */}
-              <div className="space-y-2">
-                <p className="text-[64px] md:text-[64px] leading-none text-white font-light font-[Barlow]">
-                  Agency that makes your
-                </p>
-                <p className="text-[64px] md:text-[64px] leading-none text-white italic font-[Instrument_Serif]">
-                  videos & reels viral
-                </p>
-              </div>
+          <BlurText
+            text="We Build Brands That Dominate"
+            className="text-5xl md:text-7xl lg:text-[5.5rem] font-heading italic text-white leading-[0.9] max-w-5xl justify-center tracking-[-2px]"
+            delay={100}
+            animateBy="words"
+            direction="bottom"
+          />
 
-              {/* Sub-headline */}
-              <div className="mt-8 max-w-2xl">
-                <p className="text-white/75 text-lg font-[Barlow] leading-relaxed">
-                  We craft cinematic brand content that captivates audiences and drives measurable growth. 
-                  From concept to distribution, we're your full-service video production partner.
-                </p>
-              </div>
+          <FadeIn delay={0.4}>
+            <p className="mt-8 text-xl md:text-2xl text-white/60 max-w-2xl font-body font-light leading-relaxed mx-auto">
+              Strategy + Branding + Design + Technology.{' '}
+              <span className="text-white">We engineer transformation</span> for businesses ready to own their digital space.
+            </p>
+          </FadeIn>
 
-              {/* CTA Button */}
-              <div className="mt-12">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#f8f8f8] text-[#171717] font-medium font-[Barlow] rounded-[2px] hover:bg-white transition-colors"
+          <FadeIn delay={0.6}>
+            <div className="flex items-center gap-5 mt-12 justify-center">
+              <Link to="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="liquid-glass-strong rounded-full px-7 py-3.5 text-base font-medium text-white font-body flex items-center gap-2 hover:bg-white/10 transition-all"
                 >
                   Start Your Project
                   <ArrowRight className="h-5 w-5" />
-                </Link>
-              </div>
-            </motion.div>
-          </div>
+                </motion.button>
+              </Link>
+              <Link to="/work">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-white/70 hover:text-white font-body text-base flex items-center gap-2 transition-colors"
+                >
+                  View Our Work
+                  <Play className="h-4 w-4 fill-current" />
+                </motion.button>
+              </Link>
+            </div>
+          </FadeIn>
+
+          {/* Stats */}
+          <FadeIn delay={0.8}>
+            <div className="flex gap-12 md:gap-20 mt-20 justify-center">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-3xl md:text-4xl font-heading italic text-white">{stat.value}</p>
+                  <p className="text-xs text-white/50 uppercase tracking-widest font-body mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          >
+            <Link to="/services" className="text-white/30 hover:text-white/60 transition-colors">
+              <ChevronDown className="h-8 w-8 animate-bounce" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
@@ -207,7 +209,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-xl md:text-2xl font-serif italic text-white/40 hover:text-white/70 transition-colors cursor-default"
+                className="text-xl md:text-2xl font-heading italic text-white/40 hover:text-white/70 transition-colors cursor-default"
               >
                 {partner}
               </motion.span>
@@ -222,7 +224,7 @@ export default function Home() {
           <FadeIn>
             <div className="text-center mb-20">
               <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-4">What We Do</p>
-              <h2 className="text-5xl md:text-6xl font-serif italic text-white">Services That Scale</h2>
+              <h2 className="text-5xl md:text-6xl font-heading italic text-white">Services That Scale</h2>
             </div>
           </FadeIn>
 
@@ -240,7 +242,7 @@ export default function Home() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-2xl font-serif italic text-white">{service.title}</h3>
+                          <h3 className="text-2xl font-heading italic text-white">{service.title}</h3>
                           <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-white group-hover:translate-x-2 transition-all" />
                         </div>
                         <p className="text-white/60 font-body font-light mt-2">{service.description}</p>
@@ -267,13 +269,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Work Preview */}
+      {/* Work Preview — Perspective Carousel */}
       <section className="py-32 px-4">
         <div className="max-w-5xl mx-auto">
           <FadeIn>
             <div className="text-center mb-12">
               <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-2">Our Work</p>
-              <h2 className="text-5xl md:text-6xl font-serif italic text-white">Recent Projects</h2>
+              <h2 className="text-5xl md:text-6xl font-heading italic text-white">Recent Projects</h2>
               <p className="text-white/60 font-body font-light mt-4 max-w-2xl mx-auto">
                 A showcase of our work across branding, digital, and content.
               </p>
@@ -309,7 +311,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <FadeIn>
             <p className="text-sm text-white/50 uppercase tracking-widest font-body mb-4">Let's Build Something Amazing</p>
-            <h2 className="text-5xl md:text-6xl font-serif italic text-white mb-6">Ready to Transform?</h2>
+            <h2 className="text-5xl md:text-6xl font-heading italic text-white mb-6">Ready to Transform?</h2>
             <p className="text-lg text-white/60 font-body font-light mb-10">
               Every great brand starts with a conversation. Tell us about your project.
             </p>
@@ -320,7 +322,7 @@ export default function Home() {
                 className="liquid-glass-strong rounded-full px-8 py-4 text-lg font-medium text-white font-body inline-flex items-center gap-2 hover:bg-white/10 transition-all"
               >
                 Get In Touch
-                <ArrowRight className="h-5 w-5" />
+                <ArrowUpRight className="h-5 w-5" />
               </motion.button>
             </Link>
           </FadeIn>
