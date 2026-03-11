@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Home from './pages/Home';
-import AltHome from './pages/AltHome';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import Work from './pages/Work';
@@ -20,7 +19,6 @@ export default function App() {
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/v2" element={<AltHome />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/work" element={<Work />} />
